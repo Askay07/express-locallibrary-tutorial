@@ -6,15 +6,17 @@ const  logger = require('morgan');
 
 const  indexRouter = require('./routes/index');
 const  usersRouter = require('./routes/users');
-
+const catalogRouter = require('./routes/catalog');
 const app = express();
-
 dotenv.config({ path: '.env' })
-const mongoose = require('mongoose');
-const dev_db_url = process.env.ATLAS_URI
-const mongoDB = process.env.mongoDB_URI || dev_db_url;
-db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
+var mongoose = require('mongoose');
+var dev_db_url = process.env.ATLAS_URI
+var mongoDB = process.env.MONGODB_URI || dev_db_url;
+mongoose.connect(mongoDB, {useNewUrlParser: true});
+mongoose.Promise = global.Promise;
+let db = mongoose.connection;
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -45,4 +47,4 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-app.listen(3000);
+module.exports = app;
