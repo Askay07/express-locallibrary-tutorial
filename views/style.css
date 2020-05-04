@@ -1,0 +1,14 @@
+body {
+    padding: 40px;
+    font: 16px "Times New Roman", Arial, Helvetica;
+  }
+  
+
+  .sidebar-nav {
+    margin-top: 18px;
+    list-style: none;
+  }
+
+  a {
+    color: lightgrey;
+  }
