@@ -7,14 +7,12 @@ const  logger = require('morgan');
 const  indexRouter = require('./routes/index');
 const  usersRouter = require('./routes/users');
 
-let app = express();
+const app = express();
 
-//Connection
-
+dotenv.config({ path: '.env' })
 const mongoose = require('mongoose');
-const mongoDB = 'mongodb+srv://avikay07@gmail.com:Nepal123@cluster0-2do2k.mongodb.net/test?retryWrites=true&w=majority';
-mongoose.connect(mongoDB, { useNewUrlParser: true ,useUnifiedTopology: true });
-let db = mongoose.connection;
+const dev_db_url = process.env.ATLAS_URI
+const mongoDB = process.env.mongoDB_URI || dev_db_url;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 
